@@ -24,7 +24,7 @@ class BaseRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    async def add_item(self, **kwargs: str | int) -> ModelType:
+    async def add_item(self, **kwargs: str | int | ModelType) -> ModelType:
         raise NotImplementedError
 
     @abstractmethod
@@ -33,12 +33,12 @@ class BaseRepository(ABC):
 
     @abstractmethod
     async def update_item(
-        self, item_id: int | str, **update_values: str | int
+        self, item_id: int | str, **update_values: str | int | ModelType
     ) -> ModelType:
         raise NotImplementedError
 
     @abstractmethod
-    def get_model(self, **kwargs: str | int) -> ModelType:
+    def get_model(self, **kwargs: str | int | ModelType) -> ModelType:
         raise NotImplementedError
 
 
