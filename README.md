@@ -5,7 +5,6 @@
 ## Используемые Backend технологии:
 1. **FastAPI**  
 2. **SQLAlchemy**  
-3. **Redis**
 4. **PostgreSQL**
 
 ## Возможности проекта:
@@ -14,10 +13,17 @@
 - Телеграмм бот для удобного взаимодействия с API
 
 ## Запуск проекта
-Проект запускается с помощью docker
-
+1. Склонируйте репозиторий
+```
+git clone https://github.com/xddprog/StreamEnergy-test.git
+```
+2.1 Запуск с помощью docker
 ```
 docker-compose build && docker-compose up -d
+```
+2.2 Локальный запуск
+```
+uvicorn app.main:app --reload && python tg_bot/bot.py
 ```
 
 ## Будущие возможности:
