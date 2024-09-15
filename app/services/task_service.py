@@ -6,10 +6,10 @@ from app.services.base import BaseService
 
 class TaskService(BaseService):
     repository: TaskRepository
-    
+
     async def get_task(self, task_id: int, user_id: int) -> BaseTaskModel:
         return await self.check_item(user_id, task_id)
-    
+
     async def add_task(self, user: int, form: BaseTaskModel) -> BaseTaskModel:
         return await self.repository.add_item(**form.model_dump(), user=user)
 

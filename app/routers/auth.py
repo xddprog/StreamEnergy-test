@@ -7,11 +7,20 @@ from app.dto.auth_dto import (
     RegisterForm,
     RegisterResponse,
 )
+from app.dto.user_dto import BaseUserModel
 from app.services.auth_service import AuthService
-from app.utils.dependencies import get_auth_service
+from app.utils.dependencies import get_auth_service, get_current_user_dependency
 
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
+
+
+
+@router.get("/current_user", status_code=200)
+async def get_current_user(
+    current_user: BaseUserModel = Depends(get_current_user_dependency),
+) -> BaseUserModel:
+    return current_user
 
 
 @router.post("/login", status_code=200)
