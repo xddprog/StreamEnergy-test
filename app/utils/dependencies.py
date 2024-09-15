@@ -5,12 +5,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import Depends, Request
 
 from app.dto.user_dto import BaseUserModel
-from app.repositories.note_repository import NoteRepository
-from app.repositories.note_tag_repositories import NoteTagRepository
+from app.repositories.task_repository import TaskRepository
+from app.repositories.task_tag_repository import TaskTagRepository
 from app.repositories.user_repository import UserRepository
 from app.services.auth_service import AuthService
-from app.services.note_service import NoteService
-from app.services.note_tag_service import NoteTagService
+from app.services.task_service import TaskService
+from app.services.task_tag_service import TaskTagService
 from app.services.user_service import UserService
 
 
@@ -33,16 +33,16 @@ async def get_user_service(
     return UserService(repository=UserRepository(session=session))
 
 
-async def get_note_service(
+async def get_task_service(
     session: AsyncSession = Depends(get_session),
 ) -> UserService:
-    return NoteService(repository=NoteRepository(session=session))
+    return TaskService(repository=TaskRepository(session=session))
 
 
-async def get_note_tag_service(
+async def get_task_tag_service(
     session: AsyncSession = Depends(get_session),
 ) -> UserService:
-    return NoteTagService(repository=NoteTagRepository(session=session))
+    return TaskTagService(repository=TaskTagRepository(session=session))
 
 
 async def get_current_user_dependency(

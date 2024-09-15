@@ -16,13 +16,13 @@ class User(Base):
     password: Mapped[str]
     is_login: Mapped[bool] = mapped_column(default=False)
 
-    notes: Mapped[list["Note"]] = relationship(
+    tasks: Mapped[list["Task"]] = relationship(
         back_populates="user", uselist=True, lazy="selectin"
     )
 
 
-class Note(Base):
-    __tablename__ = "notes"
+class Task(Base):
+    __tablename__ = "tasks"
 
     id: Mapped[int] = mapped_column(
         BigInteger, primary_key=True, autoincrement=True
@@ -34,18 +34,18 @@ class Note(Base):
 
     user_fk: Mapped[int] = mapped_column(ForeignKey("users.id"))
     user: Mapped["User"] = relationship(
-        back_populates="notes", uselist=False, lazy="selectin"
+        back_populates="tasks", uselist=False, lazy="selectin"
     )
 
-    tags: Mapped[list["NoteTag"]] = relationship(
-        back_populates="notes",
+    tags: Mapped[list["TaskTag"]] = relationship(
+        back_populates="tasks",
         uselist=True,
-        secondary="notes_tags",
+        secondary="tasks_tags",
         lazy="selectin",
     )
 
 
-class NoteTag(Base):
+class TaskTag(Base):
     __tablename__ = "tags"
 
     id: Mapped[int] = mapped_column(
@@ -53,19 +53,19 @@ class NoteTag(Base):
     )
     value: Mapped[str] = mapped_column(unique=True)
 
-    notes: Mapped[list["Note"]] = relationship(
+    tasks: Mapped[list["Task"]] = relationship(
         back_populates="tags",
         uselist=True,
-        secondary="notes_tags",
+        secondary="tasks_tags",
         lazy="selectin",
     )
 
 
-class NoteTage(Base):
-    __tablename__ = "notes_tags"
+class TasksTags(Base):
+    __tablename__ = "tasks_tags"
 
-    note_fk: Mapped[int] = mapped_column(
-        ForeignKey("notes.id"), primary_key=True
+    task_fk: Mapped[int] = mapped_column(
+        ForeignKey("tasks.id"), primary_key=True
     )
     tag_fk: Mapped[int] = mapped_column(
         ForeignKey("tags.id"), primary_key=True

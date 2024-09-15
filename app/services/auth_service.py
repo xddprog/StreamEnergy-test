@@ -28,11 +28,10 @@ class AuthService(BaseService):
         self.context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
     async def get_user_by_login(self, login: str) -> User:
-        return (
-            await self.repository.get_by_attribute(
-                self.repository.model.login, login
-            )
-        )[0]
+        user = await self.repository.get_by_attribute(
+            self.repository.model.login, login
+        )
+        return user[0] if user else None
 
     async def hash_password(self, password: str) -> str:
         return self.context.hash(password)

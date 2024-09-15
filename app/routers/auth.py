@@ -1,5 +1,5 @@
 from typing import Annotated
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends
 
 from app.dto.auth_dto import (
     LoginForm,
@@ -7,7 +7,6 @@ from app.dto.auth_dto import (
     RegisterForm,
     RegisterResponse,
 )
-from app.dto.user_dto import BaseUserModel
 from app.services.auth_service import AuthService
 from app.utils.dependencies import get_auth_service
 

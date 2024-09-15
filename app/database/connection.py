@@ -1,4 +1,3 @@
-from typing import Any
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 
 from app.database.models import Base

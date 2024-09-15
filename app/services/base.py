@@ -9,10 +9,13 @@ class BaseService:
     def __init__(self, repository: BaseRepository):
         self.repository = repository
 
-    @staticmethod
-    async def check_item(item, error: HTTPException) -> None:
+    async def check_item(self, item_id, error: HTTPException) -> None:
+        item = await self.repository.get_item(item_id)
+
         if not item:
             raise error
+
+        return item
 
     @staticmethod
     async def model_dump(db_model: Table, dto_model: BaseModel) -> BaseModel:

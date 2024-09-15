@@ -1,6 +1,4 @@
-from datetime import datetime
-from uuid import uuid4
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 from app.dto.user_dto import BaseUserModel
 
