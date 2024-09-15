@@ -27,4 +27,5 @@ uvicorn app.main:app --reload && python tg_bot/bot.py
 ```
 
 ## Будущие возможности:
-- Добавление веб-интерфейся или Telegramm WebApp
+- Добавление веб-интерфейса или Telegramm WebApp
+- Добавление ассинхронных запросов(в данный момент с библиотекой requests_async некорректно работает docker)
