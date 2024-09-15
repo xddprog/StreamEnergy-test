@@ -2,14 +2,15 @@ from fastapi import HTTPException
 from pydantic import BaseModel
 from sqlalchemy import Table
 
-from app.repositories.base import BaseRepository
+from database.models import ModelType
+from repositories.base import BaseRepository
 
 
 class BaseService:
     def __init__(self, repository: BaseRepository):
         self.repository = repository
 
-    async def check_item(self, item_id, error: HTTPException) -> None:
+    async def check_item(self, item_id, error: HTTPException) -> ModelType:
         item = await self.repository.get_item(item_id)
 
         if not item:

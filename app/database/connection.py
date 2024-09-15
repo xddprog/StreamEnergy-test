@@ -1,7 +1,8 @@
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 
-from app.database.models import Base
-from app.utils.config.schemas import DatabaseConfig
+from database.models import Base
+from database.models.models import TaskTag
+from utils.config.schemas import DatabaseConfig
 
 
 class DatabaseConnection:
@@ -19,6 +20,17 @@ class DatabaseConnection:
         finally:
             await session.close()
 
+    async def _create_tags(self):
+        session = await self.get_session()
+
+        tags_names = ["tag1", "tag2", "tag3", "tag4", "tag5"]
+        tags_model = [TaskTag(value=tag) for tag in tags_names]
+
+        session.add_all(tags_model)
+        await session.commit()
+        await session.close()
+
     async def create_tables(self):
         async with self.__engine.begin() as conn:
             await conn.run_sync(Base.metadata.create_all)
+        # await self._create_tags()

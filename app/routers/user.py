@@ -1,10 +1,10 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends
 
-from app.dto.task_dto import BaseTaskModel
-from app.dto.user_dto import BaseUserModel
-from app.services.user_service import UserService
-from app.utils.dependencies import (
+from dto.task_dto import BaseTaskModel
+from dto.user_dto import BaseUserModel
+from services.user_service import UserService
+from utils.dependencies import (
     get_current_user_dependency,
     get_user_service,
 )

@@ -1,6 +1,6 @@
-from app.dto.task_tags_dto import BaseTaskTagModel
-from app.repositories.task_tag_repository import TaskTagRepository
-from app.services.base import BaseService
+from dto.task_tags_dto import BaseTaskTagModel
+from repositories.task_tag_repository import TaskTagRepository
+from services.base import BaseService
 
 
 class TaskTagService(BaseService):
@@ -14,3 +14,7 @@ class TaskTagService(BaseService):
     ) -> BaseTaskTagModel:
         tag = await self.repository.get_item(tag_id)
         return await self.model_dump(tag, BaseTaskTagModel) if dump else tag
+
+    async def get_all_tags(self) -> list[BaseTaskTagModel]:
+        tags = await self.repository.get_all_items()
+        return await self.dump_items(tags, BaseTaskTagModel)

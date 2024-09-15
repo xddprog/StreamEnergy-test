@@ -1,7 +1,7 @@
-from app.dto.task_dto import BaseTaskModel, UpdateTaskForm
-from app.errors.note_errors import NoteNotFound
-from app.repositories.task_repository import TaskRepository
-from app.services.base import BaseService
+from dto.task_dto import BaseTaskModel, UpdateTaskForm
+from errors.note_errors import NoteNotFound
+from repositories.task_repository import TaskRepository
+from services.base import BaseService
 
 
 class TaskService(BaseService):
@@ -30,3 +30,9 @@ class TaskService(BaseService):
     ) -> BaseTaskModel:
         await self.check_item(user_id, task_id)
         return await self.repository.update_item(task_id, **form.model_dump())
+
+    async def tasks_by_tags(
+        self, user_id: int, tags: list[int]
+    ) -> list[BaseTaskModel]:
+        tasks = await self.repository.tasks_by_tags(user_id, tags)
+        return await self.dump_items(tasks, BaseTaskModel)

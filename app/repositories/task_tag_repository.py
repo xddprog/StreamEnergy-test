@@ -1,5 +1,5 @@
-from app.database.models.models import TaskTag
-from app.repositories.base import SqlAlchemyRepository
+from database.models.models import TaskTag
+from repositories.base import SqlAlchemyRepository
 
 
 class TaskTagRepository(SqlAlchemyRepository):

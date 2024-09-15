@@ -2,10 +2,10 @@ from fastapi import Depends, FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
-import app.routers as routers
-from app.database.connection import DatabaseConnection
-from app.utils.config.loads import load_database_config
-from app.utils.dependencies import get_current_user_dependency
+import routers as routers
+from database.connection import DatabaseConnection
+from utils.config.loads import load_database_config
+from utils.dependencies import get_current_user_dependency
 
 
 PROTECTED = Depends(get_current_user_dependency)
@@ -54,3 +54,4 @@ async def validation_exception_handler(
 app.include_router(routers.auth_router)
 app.include_router(routers.user_router, dependencies=[PROTECTED])
 app.include_router(routers.task_router, dependencies=[PROTECTED])
+app.include_router(routers.tasks_tags_router, dependencies=[PROTECTED])

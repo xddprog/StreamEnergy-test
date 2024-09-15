@@ -1,12 +1,12 @@
 from typing import Annotated
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 
-from app.dto.task_dto import AddTaskForm, BaseTaskModel, UpdateTaskForm
-from app.dto.user_dto import BaseUserModel
-from app.services.task_service import TaskService
-from app.services.task_tag_service import TaskTagService
-from app.services.user_service import UserService
-from app.utils.dependencies import (
+from dto.task_dto import AddTaskForm, BaseTaskModel, UpdateTaskForm
+from dto.user_dto import BaseUserModel
+from services.task_service import TaskService
+from services.task_tag_service import TaskTagService
+from services.user_service import UserService
+from utils.dependencies import (
     get_current_user_dependency,
     get_task_service,
     get_task_tag_service,
@@ -20,8 +20,21 @@ router = APIRouter(
 )
 
 
-@router.post("/add")
-async def add_note(
+@router.get("/filter")
+async def get_all_tasks(
+    user: Annotated[BaseUserModel, Depends(get_current_user_dependency)],
+    tasks_service: Annotated[TaskService, Depends(get_task_service)],
+    task_tags_service: Annotated[
+        TaskTagService, Depends(get_task_tag_service)
+    ],
+    tags: list = Query(),
+) -> list[BaseTaskModel]:
+    tags = [await task_tags_service.get_tag(int(tag)) for tag in tags]
+    return await tasks_service.tasks_by_tags(user.id, tags)
+
+
+@router.post("")
+async def add_task(
     user: Annotated[BaseUserModel, Depends(get_current_user_dependency)],
     user_service: Annotated[UserService, Depends(get_user_service)],
     task_service: Annotated[TaskService, Depends(get_task_service)],
@@ -38,8 +51,8 @@ async def add_note(
     return await task_service.add_task(user, form)
 
 
-@router.delete("/{task_id}/delete")
-async def delete_note(
+@router.delete("/{task_id}")
+async def delete_task(
     task_id: int,
     user: Annotated[BaseUserModel, Depends(get_current_user_dependency)],
     task_service: Annotated[TaskService, Depends(get_task_service)],
@@ -48,7 +61,7 @@ async def delete_note(
     return {"detail": "Задача удалена"}
 
 
-@router.put("/{task_id}/update")
+@router.put("/{task_id}")
 async def update_task(
     task_id: int,
     user: Annotated[BaseUserModel, Depends(get_current_user_dependency)],

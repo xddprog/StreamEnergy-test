@@ -4,14 +4,14 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from fastapi import Depends, Request
 
-from app.dto.user_dto import BaseUserModel
-from app.repositories.task_repository import TaskRepository
-from app.repositories.task_tag_repository import TaskTagRepository
-from app.repositories.user_repository import UserRepository
-from app.services.auth_service import AuthService
-from app.services.task_service import TaskService
-from app.services.task_tag_service import TaskTagService
-from app.services.user_service import UserService
+from dto.user_dto import BaseUserModel
+from repositories.task_repository import TaskRepository
+from repositories.task_tag_repository import TaskTagRepository
+from repositories.user_repository import UserRepository
+from services.auth_service import AuthService
+from services.task_service import TaskService
+from services.task_tag_service import TaskTagService
+from services.user_service import UserService
 
 
 bearer = HTTPBearer(auto_error=False)

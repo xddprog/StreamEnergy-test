@@ -2,7 +2,7 @@ from datetime import datetime
 from sqlalchemy import BigInteger, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.database.models.base import Base
+from database.models.base import Base
 
 
 class User(Base):
@@ -11,7 +11,6 @@ class User(Base):
     id: Mapped[int] = mapped_column(
         BigInteger, primary_key=True, autoincrement=True
     )
-    tg_id: Mapped[int] = mapped_column(BigInteger, nullable=False)
     login: Mapped[str] = mapped_column(unique=True)
     password: Mapped[str]
     is_login: Mapped[bool] = mapped_column(default=False)

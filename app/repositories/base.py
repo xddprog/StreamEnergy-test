@@ -5,7 +5,7 @@ from sqlalchemy import Result, select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import MappedColumn
 
-from app.database.models import ModelType
+from database.models import ModelType
 
 
 class BaseRepository(ABC):

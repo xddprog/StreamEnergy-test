@@ -1,5 +1,5 @@
 from environs import Env
-from app.utils.config.schemas import DatabaseConfig, JwtConfig
+from utils.config.schemas import DatabaseConfig, JwtConfig
 
 
 def load_database_config() -> DatabaseConfig:

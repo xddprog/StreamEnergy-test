@@ -4,18 +4,18 @@ from fastapi.security import HTTPBearer
 from jwt import InvalidTokenError, encode, decode
 from passlib.context import CryptContext
 
-from app.database.models.models import User
-from app.dto.auth_dto import LoginForm, RegisterForm
-from app.dto.user_dto import BaseUserModel
-from app.errors.auth_errors import (
+from database.models.models import User
+from dto.auth_dto import LoginForm, RegisterForm
+from dto.user_dto import BaseUserModel
+from errors.auth_errors import (
     InvalidLoginData,
     InvalidToken,
     UserAlreadyNotRegister,
     UserAlreadyRegister,
 )
-from app.repositories.user_repository import UserRepository
-from app.services.base import BaseService
-from app.utils.config.loads import load_jwt_config
+from repositories.user_repository import UserRepository
+from services.base import BaseService
+from utils.config.loads import load_jwt_config
 
 
 class AuthService(BaseService):

@@ -1,19 +1,21 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends
 
-from app.dto.auth_dto import (
+from dto.auth_dto import (
     LoginForm,
     LoginResponse,
     RegisterForm,
     RegisterResponse,
 )
-from app.dto.user_dto import BaseUserModel
-from app.services.auth_service import AuthService
-from app.utils.dependencies import get_auth_service, get_current_user_dependency
+from dto.user_dto import BaseUserModel
+from services.auth_service import AuthService
+from utils.dependencies import (
+    get_auth_service,
+    get_current_user_dependency,
+)
 
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
-
 
 
 @router.get("/current_user", status_code=200)

@@ -4,12 +4,11 @@ import logging
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
-from aiogram.types import Message
+from aiogram.fsm.storage.memory import MemoryStorage
 
 import handlers
 from config import load_bot_token
 from middlewares.auth_middleware import AuthCheckMiddleware
-from states.auth_states import AuthStates
 
 
 async def main():
@@ -25,11 +24,13 @@ async def main():
         token=bot_token,
         default=DefaultBotProperties(parse_mode=ParseMode.HTML),
     )
-    dp = Dispatcher()
+    dp = Dispatcher(storage=MemoryStorage())
 
-    dp.update.outer_middleware(AuthCheckMiddleware())
+    dp.message.outer_middleware(AuthCheckMiddleware())
 
     dp.include_router(handlers.auth_router)
+    dp.include_router(handlers.tasks_router)
+    dp.include_router(handlers.menu_router)
 
     await dp.start_polling(bot)
 

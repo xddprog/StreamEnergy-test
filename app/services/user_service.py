@@ -1,7 +1,7 @@
-from app.dto.task_dto import BaseTaskModel
-from app.dto.user_dto import BaseUserModel
-from app.errors.user_errors import UserNotFound
-from app.services.base import BaseService
+from dto.task_dto import BaseTaskModel
+from dto.user_dto import BaseUserModel
+from errors.user_errors import UserNotFound
+from services.base import BaseService
 
 
 class UserService(BaseService):
