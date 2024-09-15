@@ -1,6 +1,7 @@
 # Stream Energy Test Task
 Тестовое задание в команию СтримЭнерджи
-Ссылка на Телеграмм бота - 
+
+Ссылка на Телеграмм бота - https://t.me/stream_energy_todo_test_bot
 
 ## Используемые Backend технологии:
 1. **FastAPI**  
