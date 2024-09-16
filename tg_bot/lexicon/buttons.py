@@ -4,7 +4,7 @@ back_to_menu_button = {"back_to_menu": "Вернуться в меню"}
 menu_buttons = {
     "all_tasks": "Все задачи",
     "tasks_by_tags": "Задачи по тегам",
-    "create_task": "Создать тег",
+    "create_task": "Создать задачу",
 }
 
 

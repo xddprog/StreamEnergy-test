@@ -103,4 +103,3 @@ async def user_unauthorized(message: Message, state: FSMContext) -> None:
         text="Вы не авторизованы",
         reply_markup=await get_auth_keyboard(),
     )
-    

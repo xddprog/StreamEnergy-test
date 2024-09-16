@@ -20,7 +20,7 @@ class DatabaseConnection:
         finally:
             await session.close()
 
-    async def _create_tags(self):
+    async def create_tags(self):
         session = await self.get_session()
 
         tags_names = ["tag1", "tag2", "tag3", "tag4", "tag5"]
@@ -28,9 +28,7 @@ class DatabaseConnection:
 
         session.add_all(tags_model)
         await session.commit()
-        await session.close()
 
     async def create_tables(self):
         async with self.__engine.begin() as conn:
             await conn.run_sync(Base.metadata.create_all)
-        # await self._create_tags()

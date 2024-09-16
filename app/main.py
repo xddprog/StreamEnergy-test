@@ -14,6 +14,8 @@ PROTECTED = Depends(get_current_user_dependency)
 async def lifespan(app: FastAPI):
     app.state.db_connection = DatabaseConnection(load_database_config())
     await app.state.db_connection.create_tables()
+    await app.state.db_connection.create_tags()
+
     yield
 
 
